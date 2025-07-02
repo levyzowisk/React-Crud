@@ -3,7 +3,7 @@ import img from'../../assets/nutricionista.jpg';
 import styles from "./style.module.css"
 export function FAQSectionWithImage  ({questions})  {
     return (
-        <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-5 p-5" >
+        <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-5 p-4" >
             <div className="w-100 w-md50">
                 <Accordion defaultActiveKey="0" >
                     {questions.map((item) => {
