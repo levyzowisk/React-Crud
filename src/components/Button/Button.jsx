@@ -3,7 +3,8 @@ export function Button(props) {
     
     return (
         <div>
-            <button 
+            <button
+                className={props.className}
                 disabled = {props.optionDisabled ? props.optionDisabled : false} 
                 onClick = {props.onClick}
             >
