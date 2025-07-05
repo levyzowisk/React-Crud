@@ -46,8 +46,8 @@ export function List() {
             <RenderData/>
 
             <div className="container d-flex justify-content-center gap-1" >
-              <Button optionDisabled={checkCountIncrement()} onClick={countIncrement} content = "+"/>
               <Button optionDisabled={checkCountDecrement()} onClick={countDecrement} content = "-"/>
+              <Button optionDisabled={checkCountIncrement()} onClick={countIncrement} content = "+"/>
             </div>
 
 

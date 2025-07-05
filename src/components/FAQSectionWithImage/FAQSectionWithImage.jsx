@@ -1,8 +1,6 @@
-import { Accordion, AccordionBody, AccordionHeader } from "react-bootstrap";
+import { Accordion, AccordionBody, AccordionHeader, Container } from "react-bootstrap";
 import img from'../../assets/nutricionista.jpg';
 import styles from "./style.module.css"
-import { Button } from "../Button/Button";
-
 import Buttons from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -10,9 +8,38 @@ import { useState } from "react";
 
 
 export function FAQSectionWithImage  ({questions})  {
+    const url = 'http://localhost:3000/faq';
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [data, setData] = useState({
+        question: '',
+        author: ''
+    });
+
+    const handleInput = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        console.log(data);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).
+        then(() => handleClose()).
+        catch((e) => alert("Ocorreu um erro: " + e));
+        
+    }
+
+
 
 
     return (
@@ -39,11 +66,13 @@ export function FAQSectionWithImage  ({questions})  {
                     </Modal.Header>
                     <Modal.Body>
 
-                    <Form>
+                    <Form onSubmit={submitForm}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Sua Pergunta</Form.Label>
                         <Form.Control
-                            type="email"
+                            onChange={handleInput}
+                            name="question"
+                            type="text"
                             placeholder="Digite aqui sua pergunta"
                             autoFocus
                         />
@@ -52,22 +81,27 @@ export function FAQSectionWithImage  ({questions})  {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Seu nome</Form.Label>
                         <Form.Control
-                            type="email"
+                            type="text"
+                            onChange={handleInput}
+                            name="author"
                             placeholder="Digite aqui seu nome"
-                            autoFocus
                         />
                         </Form.Group>
+
+                        <Container className="d-flex gap-2">
+                            <Buttons variant="secondary" onClick={handleClose}>
+                                Sair
+                            </Buttons>
+                            <Buttons variant="primary" onClick={submitForm}>
+                                Enviar
+                            </Buttons>
+                        </Container>
+
+
                     </Form>
 
                     </Modal.Body>
-                    <Modal.Footer>
-                    <Buttons variant="secondary" onClick={handleClose}>
-                        Sair
-                    </Buttons>
-                    <Buttons variant="primary" onClick={handleClose}>
-                        Enviar
-                    </Buttons>
-                    </Modal.Footer>
+
                 </Modal>
                 
                
