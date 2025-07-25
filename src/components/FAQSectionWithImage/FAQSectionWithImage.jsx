@@ -8,6 +8,7 @@ import { useState } from "react";
 
 
 export function FAQSectionWithImage  ({questions})  {
+   
     const url = 'http://localhost:3000/faq';
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -26,7 +27,6 @@ export function FAQSectionWithImage  ({questions})  {
 
     const submitForm = (e) => {
         e.preventDefault();
-        console.log(data);
         fetch(url, {
             method: 'POST',
             headers: {
@@ -49,8 +49,8 @@ export function FAQSectionWithImage  ({questions})  {
                     {questions.map((item) => {
                         return (
                             <Accordion.Item className={styles.noborder} eventKey={item.id}>
-                            <AccordionHeader > <span style={{fontFamily: "Inter", fontStyle: "normal", fontWeight: "600", fontSize: "15px"}}>{item.question} </span> </AccordionHeader>
-                            <AccordionBody > {item.answer} </AccordionBody>
+                            <AccordionHeader> <span style={{fontFamily: "Inter", fontStyle: "normal", fontWeight: "600", fontSize: "15px"}}>{item.question} </span> </AccordionHeader>
+                            <AccordionBody> {item.answer} </AccordionBody>
                           </Accordion.Item> 
                         )
                     })}

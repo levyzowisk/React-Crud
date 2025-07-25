@@ -11,16 +11,13 @@ export function List() {
    });
 
     useEffect(() => {
-      fetch("http://admin.pedabete.app.br/api/faq")
+      fetch("http://localhost:3000/faq")
         .then(res => res.json())
         .then(res => setData(res))
       }, [])
       
       const RenderData = () => {
         if(data.length > 0) {  
-          console.log(data.length)
-          console.log(count);
-             
           return (<><h1 className="text-center">PERGUNTAS FREQUENTES SOBRE DIABETES </h1>  <FAQSectionWithImage questions={data.slice(count.first, count.end)}/></>)
         } else {
           return <SpinnerLoad/>  
@@ -28,6 +25,8 @@ export function List() {
       }
 
       const checkCountIncrement = () => {
+        console.log(count.first + " " + count.end);
+        
         return count.end <= data.length ? false : true;
       };
 
